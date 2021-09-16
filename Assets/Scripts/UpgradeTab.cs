@@ -38,6 +38,6 @@ public class UpgradeTab : MonoBehaviour
 
     public void UpgradeEvent()
     {
-
+        Player.BuyUpgrade(currentType);
     }
 }

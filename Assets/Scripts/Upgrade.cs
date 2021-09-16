@@ -19,7 +19,6 @@ public abstract class Upgrade
         return json;
     }
 
-    public abstract int UnlockCost();
     public abstract string GetName();
     public abstract string GetDescription();
     public abstract int GetUpgradeCost();

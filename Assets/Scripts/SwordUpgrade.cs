@@ -16,5 +16,4 @@ public class SwordUpgrade : Upgrade
     public override string GetDescription() => $"Add {GetDamage()} damage to your attack";
 
     public override string GetName() => "Sword";
-    public override int UnlockCost() => 0;
 }
