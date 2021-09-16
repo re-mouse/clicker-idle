@@ -10,10 +10,11 @@ public class PlayerInfo
     public Upgrade[] boughUpgrades;
     public PlayerInfo() 
     {
+        boughUpgrades = new Upgrade[] {new SwordUpgrade()};
     }
 
     private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade() };
-    private static Upgrade GetUpgrade(UpgradeType type) => Array.Find(upgradePool, x => x.GetUpgradeType() == type);
+    public static Upgrade GetUpgrade(UpgradeType type) => Array.Find(upgradePool, x => x.GetUpgradeType() == type);
 
 
     public PlayerInfo(JSONNode json)
@@ -29,6 +30,8 @@ public class PlayerInfo
             upgrade.lvl = upgradeJson["lvl"];
             upgrades.Add(upgrade);
         }
+
+        boughUpgrades = upgrades.ToArray();
     }
 
     public JSONObject Serialize()

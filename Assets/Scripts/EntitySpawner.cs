@@ -4,15 +4,57 @@ using UnityEngine;
 
 public class EntitySpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static EntitySpawner i;
+
+    [SerializeField]
+    private float entityRespawnDelay;
+
+    public static Entity CurrentEntity => i.currentEntity;
+    private Entity currentEntity;
+
+    [SerializeField]
+    Vector3 newEntitySpawnPoint;
+
+    [SerializeField]
+    private List<GameObject> entitySpawnPool;
+
+    private void Awake()
     {
-        
+        if (i != null && i != this)
+            Destroy(this);
+        else
+            i = this; 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        Invoke("SpawnNewEntity", 0.1f);
     }
+
+    private void EntityKill()
+    {
+        GetKillReward();
+        
+        currentEntity = null;
+        Invoke("SpawnNewEntity", entityRespawnDelay);
+    }
+
+    private void GetKillReward()
+    {
+        Player.AddGold(currentEntity.GetGoldReward());
+    }
+
+    private void SpawnNewEntity()
+    {
+        GameObject newEntityPrefab = entitySpawnPool[Random.Range(0, entitySpawnPool.Count)];
+
+        GameObject spawnedEntityObject = Instantiate(newEntityPrefab, transform);
+
+        Entity entity = spawnedEntityObject.GetComponent<Entity>();
+
+        entity.OnDeathEvent.AddListener(EntityKill);
+
+        currentEntity = entity;
+    }
+
 }

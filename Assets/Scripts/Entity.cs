@@ -42,6 +42,11 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public int GetGoldReward()
+    {
+        return 10;
+    }
+
     private void OnDestroy()
     {
         OnDeathEvent.RemoveAllListeners();

@@ -8,17 +8,24 @@ public class DataLoader : MonoBehaviour
     private void Start()
     {
         player = GetComponent<Player>();
+        InvokeRepeating("UpdatePlayerData", 3f, 3f);
 
         string json = PlayerPrefs.GetString("data");
         
-        if (json != null)
-            Player.SetPlayerInfo(new PlayerInfo(json));
+        if (json != "")
+            Player.SetPlayerInfo(new PlayerInfo(SimpleJSON.JSON.Parse(json)));
         else
             Player.SetPlayerInfo(new PlayerInfo());
     }
 
-    private void UpdatePlayerSave(PlayerInfo playerInfo)
+    private void UpdatePlayerData()
     {
-        PlayerPrefs.SetString("data", playerInfo.Serialize());
+        var playerInfo = Player.GetPlayerInfo();
+        PlayerPrefs.SetString("data", playerInfo.Serialize().ToString());
+    }
+
+    private void OnDestroy()
+    {
+        UpdatePlayerData();
     }
 }
