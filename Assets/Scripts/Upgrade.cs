@@ -7,17 +7,18 @@ public enum UpgradeType{Sword};
 
 public abstract class Upgrade
 {
-    public UpgradeType type;
-    public int lvl; 
+    public int lvl;
+
     public virtual JSONObject Serialize()
     {
         JSONObject json = new JSONObject();
 
-        json["type"] = type.ToString();
+        json["type"] = GetUpgradeType().ToString();
         json["lvl"] = lvl;
 
         return json;
-    } 
+    }
+    public abstract int GetUpgradeCost();
     public abstract UpgradeType GetUpgradeType();
     public abstract void ApplyUpgrade(Player upgrader, PlayerStats stats);
 }

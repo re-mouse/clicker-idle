@@ -2,19 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
+using System;
 
 public class PlayerInfo
 {
     public int gold;
-    public List<Upgrade> boughUpgrades;
-
-    public PlayerInfo(JSONNode node)
+    public Upgrade[] boughUpgrades;
+    public PlayerInfo() 
     {
-        JSONNode json = JSON.Parse(PlayerPrefs.GetString("player"));
+    }
 
+    private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade() };
+    private static Upgrade GetUpgrade(UpgradeType type) => Array.Find(upgradePool, x => x.GetUpgradeType() == type);
+
+
+    public PlayerInfo(JSONNode json)
+    {
         gold = json["gold"].AsInt;
         JSONNode upgradesJson = json["upgrades"];
-        
+        List<Upgrade> upgrades = new List<Upgrade>();
+
+        foreach (JSONNode upgradeJson in upgradesJson)
+        {
+            UpgradeType upgradeType = (UpgradeType)Enum.Parse(typeof(UpgradeType), upgradeJson["type"]);
+            var upgrade = GetUpgrade(upgradeType);
+            upgrade.lvl = upgradeJson["lvl"];
+            upgrades.Add(upgrade);
+        }
     }
 
     public JSONObject Serialize()
