@@ -7,6 +7,7 @@ using System;
 public class PlayerInfo
 {
     public int gold;
+    public int killedMobs;
     public Upgrade[] boughUpgrades;
     public PlayerInfo() 
     {
@@ -20,6 +21,7 @@ public class PlayerInfo
     public PlayerInfo(JSONNode json)
     {
         gold = json["gold"].AsInt;
+        killedMobs = json["mobs"].AsInt;
         JSONNode upgradesJson = json["upgrades"];
         List<Upgrade> upgrades = new List<Upgrade>();
 
@@ -39,6 +41,7 @@ public class PlayerInfo
         JSONObject json = new JSONObject();
 
         json["gold"] = gold;
+        json["mobs"] = killedMobs;
 
         JSONArray upgrades = new JSONArray();
         foreach (Upgrade upgrade in boughUpgrades)

@@ -9,7 +9,7 @@ public class SwordUpgrade : Upgrade
         stats.baseDamage += GetDamage();
     }
 
-    private int GetDamage() => Mathf.RoundToInt(10f * Mathf.Pow(1.07f, lvl));
+    private int GetDamage() => Mathf.RoundToInt(15f * Mathf.Pow(1.07f, lvl));
 
     public override int GetUpgradeCost() => Mathf.RoundToInt(100f * Mathf.Pow(1.07f, lvl));
     public override UpgradeType GetUpgradeType() => UpgradeType.Sword;

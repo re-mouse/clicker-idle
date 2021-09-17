@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EntitySpawner : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class EntitySpawner : MonoBehaviour
     private float entityRespawnDelay;
 
     public static Entity CurrentEntity => i.currentEntity;
+    public static UnityEvent OnEntityTakeDamage { get; private set; } = new UnityEvent();
+    public static UnityEvent OnEntitySpawn { get; private set; } = new UnityEvent();
     private Entity currentEntity;
 
     [SerializeField]
@@ -34,6 +37,8 @@ public class EntitySpawner : MonoBehaviour
     private void EntityKill()
     {
         GetKillReward();
+
+        Player.AddMobOnCount();
         
         currentEntity = null;
         Invoke("SpawnNewEntity", entityRespawnDelay);
@@ -55,6 +60,8 @@ public class EntitySpawner : MonoBehaviour
         entity.OnDeathEvent.AddListener(EntityKill);
 
         currentEntity = entity;
+
+        OnEntitySpawn.Invoke();
     }
 
 }

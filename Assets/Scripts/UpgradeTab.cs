@@ -19,7 +19,7 @@ public class UpgradeTab : MonoBehaviour
     [SerializeField]
     private Text upgradeCost;
 
-    private void Start()
+    private void Awake()
     {
         Player.OnPlayerInfoUpdate.AddListener(UpdateTabInfo);
     }

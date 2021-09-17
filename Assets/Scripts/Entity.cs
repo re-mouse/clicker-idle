@@ -8,13 +8,19 @@ public class Entity : MonoBehaviour
     public UnityEvent OnDeathEvent {get; private set;} = new UnityEvent();
     [SerializeField]
     private int health;
+    private int maxHealth;
     private Rigidbody2D rigidBody;
 
-    private void Start()
+    private void Awake()
     {
-        OnDeathEvent.AddListener(DropDown);   
+        OnDeathEvent.AddListener(DropDown);
+        health = Mathf.RoundToInt(100f * Mathf.Pow(1.15f, Player.GetMobCount()));
+        maxHealth = health;
         rigidBody = GetComponent<Rigidbody2D>(); 
     }
+
+    public int GetHealth() => health;
+    public int GetMaxHealth() => maxHealth;
 
     public void TakeDamage(int damage)
     {
@@ -24,11 +30,13 @@ public class Entity : MonoBehaviour
         health -= damage;
         if (health <= 0)
             OnDeathEvent.Invoke();
+
+        EntitySpawner.OnEntityTakeDamage.Invoke();
     }
 
     private void DropDown()
     {
-        rigidBody.AddForce(Vector3.up * 4, ForceMode2D.Force);
+        rigidBody.AddForce(Vector3.up * 10, ForceMode2D.Force);
         
         Destroy(GetComponent<Collider2D>());
 
@@ -44,7 +52,7 @@ public class Entity : MonoBehaviour
 
     public int GetGoldReward()
     {
-        return 10;
+        return Mathf.RoundToInt(1.0f * maxHealth * 0.15f);
     }
 
     private void OnDestroy()

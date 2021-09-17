@@ -59,4 +59,12 @@ public class Player : MonoBehaviour
         i.playerInfo.gold += goldQuantity;
         OnPlayerInfoUpdate.Invoke();
     }
+
+    public static void AddMobOnCount()
+    {
+        i.playerInfo.killedMobs++;
+        OnPlayerInfoUpdate.Invoke();
+    }
+
+    public static int GetMobCount() => i.playerInfo.killedMobs;
 }
