@@ -11,12 +11,33 @@ public class PlayerInfo
     public Upgrade[] boughUpgrades;
     public PlayerInfo() 
     {
-        boughUpgrades = new Upgrade[] {new SwordUpgrade()};
+        boughUpgrades = new Upgrade[] {new SwordUpgrade(), new ArrowsUpgrade()};
     }
 
-    private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade() };
+    private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade(), new ArrowsUpgrade() };
     public static Upgrade GetUpgrade(UpgradeType type) => Array.Find(upgradePool, x => x.GetUpgradeType() == type);
 
+
+    public static string GetAdaptedInt(int intToAdapt)
+    {
+        if (intToAdapt > Mathf.Pow(10, 12)) 
+        {
+            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}Q";
+        }
+        else if (intToAdapt > Mathf.Pow(10, 9))
+        {
+            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}B";
+        }
+        else if (intToAdapt > Mathf.Pow(10, 6))
+        {
+            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}M";
+        }
+        else if (intToAdapt > Mathf.Pow(10, 3))
+        {
+            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}K";
+        }
+        return intToAdapt.ToString();
+    }
 
     public PlayerInfo(JSONNode json)
     {

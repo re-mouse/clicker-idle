@@ -5,4 +5,6 @@ using UnityEngine;
 public class PlayerStats
 {
     public int baseDamage;
+    public int arrowDamage;
+    public int rockDamage;
 }

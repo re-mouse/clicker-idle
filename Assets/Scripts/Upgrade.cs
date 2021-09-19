@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
 
-public enum UpgradeType{Sword};
+public enum UpgradeType{Sword, Arrow, Rock, Mace};
 
 public abstract class Upgrade
 {

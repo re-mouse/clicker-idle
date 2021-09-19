@@ -7,6 +7,7 @@ public class DataLoader : MonoBehaviour
     private Player player;
     private void Start()
     {
+        PlayerPrefs.DeleteAll();
         player = GetComponent<Player>();
         InvokeRepeating("UpdatePlayerData", 3f, 3f);
 

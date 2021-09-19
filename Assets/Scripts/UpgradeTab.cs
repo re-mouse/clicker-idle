@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 
 public class UpgradeTab : MonoBehaviour
@@ -18,6 +16,8 @@ public class UpgradeTab : MonoBehaviour
     private Text upgradeLvl;
     [SerializeField]
     private Text upgradeCost;
+    [SerializeField]
+    private Image upgradeIcon;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class UpgradeTab : MonoBehaviour
 
         upgradeName.text = currentUpgrade.GetName();
         upgradeDescription.text = currentUpgrade.GetDescription();
-        upgradeLvl.text = currentUpgrade.lvl.ToString();
+        upgradeLvl.text = currentUpgrade.lvl.ToString() + "lvl";
         upgradeCost.text = currentUpgrade.GetUpgradeCost().ToString();
     }
 

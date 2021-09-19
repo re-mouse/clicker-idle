@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     }
 
     public static PlayerInfo GetPlayerInfo() => i.playerInfo;
+    public static PlayerStats GetPlayerStats() => i.stats;
+
 
     private void UpdateUpgrades()
     {
@@ -49,9 +51,9 @@ public class Player : MonoBehaviour
         OnPlayerInfoUpdate.Invoke();
     }
 
-    public static void DamageCurrentEntity()
+    public static void DamageCurrentEntity(int damage)
     {
-        EntitySpawner.CurrentEntity?.TakeDamage(i.stats.baseDamage);
+        EntitySpawner.CurrentEntity?.TakeDamage(damage);
     }
 
     public static void AddGold(int goldQuantity)

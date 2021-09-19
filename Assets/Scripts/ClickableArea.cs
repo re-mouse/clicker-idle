@@ -6,6 +6,6 @@ public class ClickableArea : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        Player.DamageCurrentEntity();
+        Player.DamageCurrentEntity(Player.GetPlayerStats().baseDamage);
     }
 }
