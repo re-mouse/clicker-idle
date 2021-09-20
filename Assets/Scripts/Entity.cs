@@ -31,7 +31,7 @@ public class Entity : MonoBehaviour
         if (health <= 0)
             OnDeathEvent.Invoke();
 
-        EntitySpawner.OnEntityTakeDamage.Invoke();
+        EntitySpawner.OnEntityTakeDamage.Invoke(damage);
     }
 
     private void DropDown()

@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public class TakeDamageEvent : UnityEvent<int>
+{
+
+}
+
+
 public class EntitySpawner : MonoBehaviour
 {
     private static EntitySpawner i;
@@ -11,7 +17,7 @@ public class EntitySpawner : MonoBehaviour
     private float entityRespawnDelay;
 
     public static Entity CurrentEntity => i.currentEntity;
-    public static UnityEvent OnEntityTakeDamage { get; private set; } = new UnityEvent();
+    public static TakeDamageEvent OnEntityTakeDamage { get; private set; } = new TakeDamageEvent();
     public static UnityEvent OnEntitySpawn { get; private set; } = new UnityEvent();
     private Entity currentEntity;
 

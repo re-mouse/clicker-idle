@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject battleDamagePrefab;
+    [SerializeField]
+    private RectTransform battleDamageSpawnTransform;
+    [SerializeField]
     private Text gold;
     [SerializeField]
     private Slider healthBar;
@@ -15,7 +19,8 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         EntitySpawner.OnEntitySpawn.AddListener(UpdateEntityHealthBar);
-        EntitySpawner.OnEntityTakeDamage.AddListener(UpdateEntityHealthBar);
+        EntitySpawner.OnEntityTakeDamage.AddListener(x => UpdateEntityHealthBar());
+        EntitySpawner.OnEntityTakeDamage.AddListener(ShowDamageText);
         Player.OnPlayerInfoUpdate.AddListener(UpdateGold);
     }
 
@@ -30,6 +35,16 @@ public class UIManager : MonoBehaviour
 
         healthBar.value = 1.0f * EntitySpawner.CurrentEntity.GetHealth() / EntitySpawner.CurrentEntity.GetMaxHealth();
         health.text = $"{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetHealth())}/{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetMaxHealth())}";
+    }
+
+    private void ShowDamageText(int damage)
+    {
+        var damageTextObject = Instantiate(battleDamagePrefab, battleDamageSpawnTransform);
+        var pos = damageTextObject.GetComponent<RectTransform>().anchoredPosition;
+        pos.x += Random.Range(-160, 160);
+        pos.y += Random.Range(-5, 150);
+        damageTextObject.GetComponent<RectTransform>().anchoredPosition = pos;
+        damageTextObject.GetComponent<Text>().text = $"-{PlayerInfo.GetAdaptedInt(damage)} HP";
     }
 
     private void UpdateGold()
