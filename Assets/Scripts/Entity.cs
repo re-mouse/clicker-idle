@@ -50,6 +50,11 @@ public class Entity : MonoBehaviour
         }
     }
 
+    private void OnMouseDown()
+    {
+        Player.DamageCurrentEntity(Player.GetPlayerStats().baseDamage);
+    }
+
     public int GetGoldReward()
     {
         return Mathf.RoundToInt(1.0f * maxHealth * 0.15f);

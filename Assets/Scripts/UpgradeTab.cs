@@ -32,8 +32,8 @@ public class UpgradeTab : MonoBehaviour
 
         upgradeName.text = currentUpgrade.GetName();
         upgradeDescription.text = currentUpgrade.GetDescription();
-        upgradeLvl.text = currentUpgrade.lvl.ToString() + "lvl";
-        upgradeCost.text = currentUpgrade.GetUpgradeCost().ToString();
+        upgradeLvl.text = PlayerInfo.GetAdaptedInt(currentUpgrade.lvl) + " lvl";
+        upgradeCost.text = PlayerInfo.GetAdaptedInt(currentUpgrade.GetUpgradeCost());
     }
 
     public void UpgradeEvent()

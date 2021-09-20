@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MaceUpgrade : MonoBehaviour
+public class MaceUpgrade : Upgrade
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ApplyUpgrade(Player upgrader, PlayerStats stats)
     {
-        
+        stats.baseDamage += GetDamage();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private int GetDamage() => Mathf.RoundToInt(20000f * Mathf.Pow(1.07f, lvl));
+
+    public override int GetUpgradeCost() => Mathf.RoundToInt(80000f * Mathf.Pow(1.07f, lvl));
+    public override UpgradeType GetUpgradeType() => UpgradeType.Mace;
+    public override string GetDescription() => $"Add {PlayerInfo.GetAdaptedInt(GetDamage())} damage to your attack";
+
+    public override string GetName() => "Mace";
 }

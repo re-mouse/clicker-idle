@@ -29,11 +29,11 @@ public class UIManager : MonoBehaviour
         }
 
         healthBar.value = 1.0f * EntitySpawner.CurrentEntity.GetHealth() / EntitySpawner.CurrentEntity.GetMaxHealth();
-        health.text = $"{EntitySpawner.CurrentEntity.GetHealth()}/{EntitySpawner.CurrentEntity.GetMaxHealth()}";
+        health.text = $"{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetHealth())}/{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetMaxHealth())}";
     }
 
     private void UpdateGold()
     {
-        gold.text = Player.GetPlayerInfo().gold.ToString();
+        gold.text = PlayerInfo.GetAdaptedInt(Player.GetPlayerInfo().gold);
     }
 }

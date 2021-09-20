@@ -11,30 +11,32 @@ public class PlayerInfo
     public Upgrade[] boughUpgrades;
     public PlayerInfo() 
     {
-        boughUpgrades = new Upgrade[] {new SwordUpgrade(), new ArrowsUpgrade()};
+        boughUpgrades = new Upgrade[] {new SwordUpgrade(), new ArrowsUpgrade(), new RockUpgrade(), new MaceUpgrade()};
     }
 
-    private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade(), new ArrowsUpgrade() };
+    private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade(), new ArrowsUpgrade(), new RockUpgrade(), new MaceUpgrade() };
     public static Upgrade GetUpgrade(UpgradeType type) => Array.Find(upgradePool, x => x.GetUpgradeType() == type);
 
 
-    public static string GetAdaptedInt(int intToAdapt)
+    public static string GetAdaptedInt(int requireInt)
     {
+        float intToAdapt = requireInt;
         if (intToAdapt > Mathf.Pow(10, 12)) 
         {
-            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}Q";
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 12))}Q";
         }
         else if (intToAdapt > Mathf.Pow(10, 9))
         {
-            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}B";
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 9))}B";
         }
         else if (intToAdapt > Mathf.Pow(10, 6))
         {
-            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}M";
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 6))}M";
         }
         else if (intToAdapt > Mathf.Pow(10, 3))
         {
-            return $"{Mathf.RoundToInt(intToAdapt / Mathf.Pow(10, 12))}K";
+            Debug.Log(intToAdapt / Mathf.Pow(10, 3));
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 3))}K";
         }
         return intToAdapt.ToString();
     }
