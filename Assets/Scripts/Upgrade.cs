@@ -7,7 +7,7 @@ public enum UpgradeType{Sword, Arrow, Rock, Mace};
 
 public abstract class Upgrade
 {
-    public int lvl;
+    public long lvl;
 
     public virtual JSONObject Serialize()
     {
@@ -21,7 +21,7 @@ public abstract class Upgrade
 
     public abstract string GetName();
     public abstract string GetDescription();
-    public abstract int GetUpgradeCost();
+    public abstract long GetUpgradeCost();
     public abstract UpgradeType GetUpgradeType();
     public abstract void ApplyUpgrade(Player upgrader, PlayerStats stats);
 }

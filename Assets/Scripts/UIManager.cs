@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         health.text = $"{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetHealth())}/{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetMaxHealth())}";
     }
 
-    private void ShowDamageText(int damage)
+    private void ShowDamageText(long damage)
     {
         var damageTextObject = Instantiate(battleDamagePrefab, battleDamageSpawnTransform);
         var pos = damageTextObject.GetComponent<RectTransform>().anchoredPosition;

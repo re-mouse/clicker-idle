@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         OnPlayerInfoUpdate.Invoke();
     }
 
-    public static void DamageCurrentEntity(int damage)
+    public static void DamageCurrentEntity(long damage)
     {
         EntitySpawner.CurrentEntity?.TakeDamage(damage);
     }
@@ -68,5 +68,5 @@ public class Player : MonoBehaviour
         OnPlayerInfoUpdate.Invoke();
     }
 
-    public static int GetMobCount() => i.playerInfo.killedMobs;
+    public static long GetMobCount() => i.playerInfo.killedMobs;
 }

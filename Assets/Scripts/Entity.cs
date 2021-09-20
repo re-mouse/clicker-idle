@@ -7,8 +7,8 @@ public class Entity : MonoBehaviour
 {
     public UnityEvent OnDeathEvent {get; private set;} = new UnityEvent();
     [SerializeField]
-    private int health;
-    private int maxHealth;
+    private long health;
+    private long maxHealth;
     private Rigidbody2D rigidBody;
 
     private void Awake()
@@ -19,10 +19,10 @@ public class Entity : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>(); 
     }
 
-    public int GetHealth() => health;
-    public int GetMaxHealth() => maxHealth;
+    public long GetHealth() => health;
+    public long GetMaxHealth() => maxHealth;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(long damage)
     {
         if (health <= 0)
             return;

@@ -11,7 +11,7 @@ public class SwordUpgrade : Upgrade
 
     private int GetDamage() => Mathf.RoundToInt(15f * Mathf.Pow(1.07f, lvl));
 
-    public override int GetUpgradeCost() => Mathf.RoundToInt(100f * Mathf.Pow(1.07f, lvl));
+    public override long GetUpgradeCost() => Mathf.RoundToInt(100f * Mathf.Pow(1.07f, lvl));
     public override UpgradeType GetUpgradeType() => UpgradeType.Sword;
     public override string GetDescription() => $"Add {PlayerInfo.GetAdaptedInt(GetDamage())} damage to your attack";
 

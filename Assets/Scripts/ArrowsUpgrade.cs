@@ -14,7 +14,7 @@ public class ArrowsUpgrade : Upgrade
 
     public override string GetName() => "Bow";
 
-    public override int GetUpgradeCost() => Mathf.RoundToInt(10000f * Mathf.Pow(1.07f, lvl));
+    public override long GetUpgradeCost() => Mathf.RoundToInt(10000f * Mathf.Pow(1.07f, lvl));
     //public override int GetUpgradeCost() => 1;
 
 

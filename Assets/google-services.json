@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "434786753600",
+    "project_id": "vibe-hunter",
+    "storage_bucket": "vibe-hunter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434786753600:android:59267eae6a4f46062fd3a5",
+        "android_client_info": {
+          "package_name": "com.nebo15.vibehunter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434786753600-cglv5uu0kbe1mgg3re2di072tkur2vgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkG5ZHBdUZQq7wsn6SUmBpZhGQkOHkCfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434786753600-cglv5uu0kbe1mgg3re2di072tkur2vgt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

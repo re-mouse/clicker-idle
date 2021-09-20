@@ -6,8 +6,8 @@ using System;
 
 public class PlayerInfo
 {
-    public int gold;
-    public int killedMobs;
+    public long gold;
+    public long killedMobs;
     public Upgrade[] boughUpgrades;
     public PlayerInfo() 
     {
@@ -22,6 +22,29 @@ public class PlayerInfo
     {
         float intToAdapt = requireInt;
         if (intToAdapt > Mathf.Pow(10, 13)) 
+        {
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 12))}Q";
+        }
+        else if (intToAdapt > Mathf.Pow(10, 10))
+        {
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 9))}B";
+        }
+        else if (intToAdapt > Mathf.Pow(10, 7))
+        {
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 6))}M";
+        }
+        else if (intToAdapt > Mathf.Pow(10, 4))
+        {
+            Debug.Log(intToAdapt / Mathf.Pow(10, 3));
+            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 3))}K";
+        }
+        return intToAdapt.ToString();
+    }
+
+    public static string GetAdaptedInt(long requireInt)
+    {
+        float intToAdapt = requireInt;
+        if (intToAdapt > Mathf.Pow(10, 13))
         {
             return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 12))}Q";
         }

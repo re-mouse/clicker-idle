@@ -9,9 +9,9 @@ public class MaceUpgrade : Upgrade
         stats.baseDamage += GetDamage();
     }
 
-    private int GetDamage() => Mathf.RoundToInt(20000f * Mathf.Pow(1.07f, lvl));
+    private int GetDamage() => lvl > 0 ? Mathf.RoundToInt(20000f * Mathf.Pow(1.07f, lvl)) : 0;
 
-    public override int GetUpgradeCost() => Mathf.RoundToInt(80000f * Mathf.Pow(1.07f, lvl));
+    public override long GetUpgradeCost() => Mathf.RoundToInt(80000f * Mathf.Pow(1.07f, lvl));
     public override UpgradeType GetUpgradeType() => UpgradeType.Mace;
     public override string GetDescription() => $"Add {PlayerInfo.GetAdaptedInt(GetDamage())} damage to your attack";
 
