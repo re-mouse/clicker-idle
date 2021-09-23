@@ -677,7 +677,8 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    7: MOREMOUNTAINS_NICEVIBRATIONS
   platformArchitecture: {}
   scriptingBackend:
     Android: 1

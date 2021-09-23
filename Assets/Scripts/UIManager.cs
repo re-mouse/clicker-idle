@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MoreMountains.NiceVibrations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
         EntitySpawner.OnEntitySpawn.AddListener(UpdateEntityHealthBar);
         EntitySpawner.OnEntityTakeDamage.AddListener(x => UpdateEntityHealthBar());
         EntitySpawner.OnEntityTakeDamage.AddListener(ShowDamageText);
+        EntitySpawner.OnEntityTakeDamage.AddListener(x => MMVibrationManager.Haptic(HapticTypes.SoftImpact));
         Player.OnPlayerInfoUpdate.AddListener(UpdateGold);
     }
 

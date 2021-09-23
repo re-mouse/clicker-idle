@@ -18,7 +18,7 @@ public class BattleDamage : MonoBehaviour
     {
         while (text.color.a > 0)
         {
-            rectTransform.anchoredPosition += Vector2.up * 2f;
+            rectTransform.anchoredPosition += Vector2.up * 4f;
             var color = text.color;
             color.a -= 0.01f;
             text.color = color;
