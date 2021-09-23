@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "com.google.external-dependency-manager": "file:../Assets/com.google.external-dependency-manager-1.2.166.tgz",
+    "com.google.firebase.analytics": "file:../Assets/com.google.firebase.analytics-8.3.0.tgz",
+    "com.google.firebase.app": "file:../Assets/com.google.firebase.app-8.3.0.tgz",
+    "com.google.firebase.messaging": "file:../Assets/com.google.firebase.messaging-8.3.0.tgz",
     "com.unity.2d.animation": "3.2.9",
     "com.unity.2d.pixel-perfect": "2.1.0",
     "com.unity.2d.psdimporter": "2.1.8",

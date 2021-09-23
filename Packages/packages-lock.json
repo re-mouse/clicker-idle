@@ -1,5 +1,35 @@
 {
   "dependencies": {
+    "com.google.external-dependency-manager": {
+      "version": "file:../Assets/com.google.external-dependency-manager-1.2.166.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
+    "com.google.firebase.analytics": {
+      "version": "file:../Assets/com.google.firebase.analytics-8.3.0.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.google.firebase.app": "8.3.0"
+      }
+    },
+    "com.google.firebase.app": {
+      "version": "file:../Assets/com.google.firebase.app-8.3.0.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.166"
+      }
+    },
+    "com.google.firebase.messaging": {
+      "version": "file:../Assets/com.google.firebase.messaging-8.3.0.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.google.firebase.app": "8.3.0"
+      }
+    },
     "com.unity.2d.animation": {
       "version": "3.2.9",
       "depth": 0,
