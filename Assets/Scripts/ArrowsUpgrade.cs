@@ -8,13 +8,13 @@ public class ArrowsUpgrade : Upgrade
     {
         stats.arrowDamage += GetDamage();
     }
-    private int GetDamage() => lvl > 0 ? Mathf.RoundToInt(500 * Mathf.Pow(1.07f, lvl)) : 0;
+    private ulong GetDamage() => lvl > 0 ? Mathf.RoundToInt(500 * Mathf.Pow(1.07f, lvl)) : 0;
 
     public override string GetDescription() => $"Shoot arrow with {PlayerInfo.GetAdaptedInt(GetDamage())} dmg every 1.5 seconds";
 
     public override string GetName() => "Bow";
 
-    public override long GetUpgradeCost() => Mathf.RoundToInt(10000f * Mathf.Pow(1.07f, lvl));
+    public override ulong GetUpgradeCost() => Mathf.RoundToInt(10000f * Mathf.Pow(1.07f, lvl));
     //public override int GetUpgradeCost() => 1;
 
 

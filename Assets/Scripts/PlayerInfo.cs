@@ -17,26 +17,34 @@ public class PlayerInfo
     private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade(), new ArrowsUpgrade(), new RockUpgrade(), new MaceUpgrade() };
     public static Upgrade GetUpgrade(UpgradeType type) => Array.Find(upgradePool, x => x.GetUpgradeType() == type);
 
-
-    public static string GetAdaptedInt(int requireInt)
+    private static ulong GetPowULong(ulong requiredULong, int pow)
     {
-        float intToAdapt = requireInt;
-        if (intToAdapt > Mathf.Pow(10, 13)) 
+        ulong originalULong = requiredULong;
+        for (int i = 0; i < pow; i++)
         {
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 12))}Q";
+            requiredULong *= originalULong;
         }
-        else if (intToAdapt > Mathf.Pow(10, 10))
+
+        return requiredULong;
+    }
+    public static string GetAdaptedInt(ulong requireInt)
+    {
+        decimal intToAdapt = requireInt;
+        if (intToAdapt > GetPowULong(10, 13)) 
         {
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 9))}B";
+            return $"{Math.Round(intToAdapt / GetPowULong(10, 12))}Q";
         }
-        else if (intToAdapt > Mathf.Pow(10, 7))
+        else if (intToAdapt > GetPowULong(10, 10))
         {
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 6))}M";
+            return $"{Math.Round(intToAdapt / GetPowULong(10, 9))}B";
         }
-        else if (intToAdapt > Mathf.Pow(10, 4))
+        else if (intToAdapt > GetPowULong(10, 7))
         {
-            Debug.Log(intToAdapt / Mathf.Pow(10, 3));
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 3))}K";
+            return $"{Math.Round(intToAdapt / GetPowULong(10, 6))}M";
+        }
+        else if (intToAdapt > GetPowULong(10, 4))
+        {
+            return $"{Math.Round(intToAdapt / GetPowULong(10, 3))}K";
         }
         return intToAdapt.ToString();
     }
