@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +7,15 @@ public class SwordUpgrade : Upgrade
 {
     public override void ApplyUpgrade(Player upgrader, PlayerStats stats)
     {
-        stats.baseDamage += GetDamage();
+        stats.baseDamage += GetDamage(lvl);
     }
 
-    private int GetDamage() => Mathf.RoundToInt(15f * Mathf.Pow(1.07f, lvl));
+    private ulong GetDamage(ulong lvl) => Convert.ToUInt64(Math.Round(15d * Math.Pow(1.07d, lvl)));
 
-    public override long GetUpgradeCost() => Mathf.RoundToInt(100f * Mathf.Pow(1.07f, lvl));
+    public override ulong GetUpgradeCost() => Convert.ToUInt64(Math.Round(100d * Math.Pow(1.07d, lvl)));
     public override UpgradeType GetUpgradeType() => UpgradeType.Sword;
-    public override string GetDescription() => $"Add {PlayerInfo.GetAdaptedInt(GetDamage())} damage to your attack";
+    public override string GetDamageText() => PlayerInfo.GetAdaptedInt(GetDamage(lvl));
 
     public override string GetName() => "Sword";
+    public override string GetNextLvlUpgradeDamage() => PlayerInfo.GetAdaptedInt(GetDamage(lvl + 1) - GetDamage(lvl));
 }

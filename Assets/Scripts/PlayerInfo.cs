@@ -6,8 +6,8 @@ using System;
 
 public class PlayerInfo
 {
-    public long gold;
-    public long killedMobs;
+    public ulong gold;
+    public ulong killedMobs;
     public Upgrade[] boughUpgrades;
     public PlayerInfo() 
     {
@@ -20,6 +20,7 @@ public class PlayerInfo
     private static ulong GetPowULong(ulong requiredULong, int pow)
     {
         ulong originalULong = requiredULong;
+        requiredULong = 1;
         for (int i = 0; i < pow; i++)
         {
             requiredULong *= originalULong;
@@ -27,55 +28,32 @@ public class PlayerInfo
 
         return requiredULong;
     }
-    public static string GetAdaptedInt(ulong requireInt)
+
+    public static string GetAdaptedInt(ulong intToAdapt)
     {
-        decimal intToAdapt = requireInt;
         if (intToAdapt > GetPowULong(10, 13)) 
         {
-            return $"{Math.Round(intToAdapt / GetPowULong(10, 12))}Q";
+            return $"{intToAdapt / GetPowULong(10, 12)}Q";
         }
         else if (intToAdapt > GetPowULong(10, 10))
         {
-            return $"{Math.Round(intToAdapt / GetPowULong(10, 9))}B";
+            return $"{intToAdapt / GetPowULong(10, 9)}B";
         }
         else if (intToAdapt > GetPowULong(10, 7))
         {
-            return $"{Math.Round(intToAdapt / GetPowULong(10, 6))}M";
+            return $"{intToAdapt / GetPowULong(10, 6)}M";
         }
         else if (intToAdapt > GetPowULong(10, 4))
         {
-            return $"{Math.Round(intToAdapt / GetPowULong(10, 3))}K";
-        }
-        return intToAdapt.ToString();
-    }
-
-    public static string GetAdaptedInt(long requireInt)
-    {
-        float intToAdapt = requireInt;
-        if (intToAdapt > Mathf.Pow(10, 13))
-        {
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 12))}Q";
-        }
-        else if (intToAdapt > Mathf.Pow(10, 10))
-        {
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 9))}B";
-        }
-        else if (intToAdapt > Mathf.Pow(10, 7))
-        {
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 6))}M";
-        }
-        else if (intToAdapt > Mathf.Pow(10, 4))
-        {
-            Debug.Log(intToAdapt / Mathf.Pow(10, 3));
-            return $"{Mathf.FloorToInt(intToAdapt / Mathf.Pow(10, 3))}K";
+            return $"{intToAdapt / GetPowULong(10, 3)}K";
         }
         return intToAdapt.ToString();
     }
 
     public PlayerInfo(JSONNode json)
     {
-        gold = json["gold"].AsInt;
-        killedMobs = json["mobs"].AsInt;
+        gold = json["gold"].AsULong;
+        killedMobs = json["mobs"].AsULong;
         JSONNode upgradesJson = json["upgrades"];
         List<Upgrade> upgrades = new List<Upgrade>();
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats
 {
-    public long baseDamage;
-    public long arrowDamage;
-    public long rockDamage;
+    public ulong baseDamage;
+    public ulong arrowDamage;
+    public ulong rockDamage;
 }

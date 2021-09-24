@@ -11,13 +11,13 @@ public class UpgradeTab : MonoBehaviour
     [SerializeField]
     private Text upgradeName;
     [SerializeField]
-    private Text upgradeDescription;
+    private Text damageText;
     [SerializeField]
     private Text upgradeLvl;
     [SerializeField]
     private Text upgradeCost;
     [SerializeField]
-    private Image upgradeIcon;
+    private Text upgradeLvlDamage;
 
     private void Awake()
     {
@@ -31,9 +31,10 @@ public class UpgradeTab : MonoBehaviour
             return;
 
         upgradeName.text = currentUpgrade.GetName();
-        upgradeDescription.text = currentUpgrade.GetDescription();
+        damageText.text = currentUpgrade.GetDamageText();
         upgradeLvl.text = PlayerInfo.GetAdaptedInt(currentUpgrade.lvl) + " lvl";
         upgradeCost.text = PlayerInfo.GetAdaptedInt(currentUpgrade.GetUpgradeCost());
+        upgradeLvlDamage.text = $"+{currentUpgrade.GetNextLvlUpgradeDamage()}";
     }
 
     public void UpgradeEvent()

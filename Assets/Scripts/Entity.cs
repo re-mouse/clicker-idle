@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,28 +8,34 @@ public class Entity : MonoBehaviour
 {
     public UnityEvent OnDeathEvent {get; private set;} = new UnityEvent();
     [SerializeField]
-    private long health;
-    private long maxHealth;
+    private ulong health;
+    private ulong maxHealth;
     private Rigidbody2D rigidBody;
 
     private void Awake()
     {
         OnDeathEvent.AddListener(DropDown);
-        health = Mathf.RoundToInt(100f * Mathf.Pow(1.15f, Player.GetMobCount()));
         maxHealth = health;
         rigidBody = GetComponent<Rigidbody2D>(); 
     }
 
-    public long GetHealth() => health;
-    public long GetMaxHealth() => maxHealth;
-
-    public void TakeDamage(long damage)
+    public void SetHealth(ulong health)
     {
-        if (health <= 0)
+        this.health = health;
+        maxHealth = health;
+    }
+
+    public ulong GetHealth() => health;
+    public ulong GetMaxHealth() => maxHealth;
+
+    public void TakeDamage(ulong damage)
+    {
+        if (health == 0)
             return;
 
-        health -= damage;
-        if (health <= 0)
+        if (health > damage)
+            health -= damage;
+        else
             OnDeathEvent.Invoke();
 
         EntitySpawner.OnEntityTakeDamage.Invoke(damage);
@@ -55,9 +62,9 @@ public class Entity : MonoBehaviour
         Player.DamageCurrentEntity(Player.GetPlayerStats().baseDamage);
     }
 
-    public int GetGoldReward()
+    public ulong GetGoldReward()
     {
-        return Mathf.RoundToInt(1.0f * maxHealth * 0.15f);
+        return Convert.ToUInt64(Math.Round(1.0f * maxHealth * 0.15f));
     }
 
     private void OnDestroy()

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
+    private Text bossKillTimer;
+    [SerializeField]
     private GameObject battleDamagePrefab;
     [SerializeField]
     private RectTransform battleDamageSpawnTransform;
@@ -17,13 +19,33 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text health;
 
+    private Coroutine bossKillTimerCoroutine;
+
     private void Awake()
     {
         EntitySpawner.OnEntitySpawn.AddListener(UpdateEntityHealthBar);
+
         EntitySpawner.OnEntityTakeDamage.AddListener(x => UpdateEntityHealthBar());
         EntitySpawner.OnEntityTakeDamage.AddListener(ShowDamageText);
         EntitySpawner.OnEntityTakeDamage.AddListener(x => MMVibrationManager.Haptic(HapticTypes.SoftImpact));
+
+        EntitySpawner.OnBossSpawn.AddListener(() => bossKillTimerCoroutine = StartCoroutine(ShowBossKillTimer()));
+        EntitySpawner.OnBossDeath.AddListener(() => StopCoroutine(bossKillTimerCoroutine));
+        EntitySpawner.OnBossDeath.AddListener(() => bossKillTimer.text = "");
+
         Player.OnPlayerInfoUpdate.AddListener(UpdateGold);
+    }
+
+    private IEnumerator ShowBossKillTimer()
+    {
+        float timer = EntitySpawner.timeToKillBoss;
+        while (timer > 0)
+        {
+            timer -= 0.1f;
+            bossKillTimer.text = timer.ToString("0.0");
+            yield return new WaitForSeconds(.1f);
+        }
+        bossKillTimer.text = "";
     }
 
     private void UpdateEntityHealthBar()
@@ -39,8 +61,10 @@ public class UIManager : MonoBehaviour
         health.text = $"{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetHealth())}/{PlayerInfo.GetAdaptedInt(EntitySpawner.CurrentEntity.GetMaxHealth())}";
     }
 
-    private void ShowDamageText(long damage)
+    private void ShowDamageText(ulong damage)
     {
+        if (damage == 0)
+            return;
         var damageTextObject = Instantiate(battleDamagePrefab, battleDamageSpawnTransform);
         var pos = damageTextObject.GetComponent<RectTransform>().anchoredPosition;
         pos.x += Random.Range(-160, 160);

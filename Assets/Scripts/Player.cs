@@ -51,12 +51,12 @@ public class Player : MonoBehaviour
         OnPlayerInfoUpdate.Invoke();
     }
 
-    public static void DamageCurrentEntity(long damage)
+    public static void DamageCurrentEntity(ulong damage)
     {
         EntitySpawner.CurrentEntity?.TakeDamage(damage);
     }
 
-    public static void AddGold(int goldQuantity)
+    public static void AddGold(ulong goldQuantity)
     {
         i.playerInfo.gold += goldQuantity;
         OnPlayerInfoUpdate.Invoke();
@@ -68,5 +68,10 @@ public class Player : MonoBehaviour
         OnPlayerInfoUpdate.Invoke();
     }
 
-    public static long GetMobCount() => i.playerInfo.killedMobs;
+    public static void ReduceMobCount(ulong count)
+    {
+        i.playerInfo.killedMobs -= count;
+        OnPlayerInfoUpdate.Invoke();
+    }
+    public static ulong GetMobCount() => i.playerInfo.killedMobs;
 }
