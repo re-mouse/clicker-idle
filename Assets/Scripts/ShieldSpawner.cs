@@ -24,7 +24,7 @@ public class ShieldSpawner : MonoBehaviour
     private IEnumerator ShowShield()
     {
         float passedTime = 0f;
-        
+
         float timeToSwapShields;
         if (GetBossLvl() <= 10)
             timeToSwapShields = 10f * Mathf.Pow(1.20f, -1f * GetBossLvl());
@@ -40,6 +40,10 @@ public class ShieldSpawner : MonoBehaviour
             shieldCount = 2;
         else
             shieldCount = 3;
+
+        print($" calculated shield count {shieldCount}");
+        print($"{Player.GetMobCount()}");
+
 
         while (passedTime < EntitySpawner.timeToKillBoss)
         {
@@ -69,14 +73,18 @@ public class ShieldSpawner : MonoBehaviour
             return;
         }
 
+        print($"enable shield count {count}");
+
         for (int i = 0; i < count; i++)
         {
-            int shieldToEnable = Random.Range(0, shieldCount);  shieldsToEnable.Add(Random.Range(0, shieldCount));
+            int shieldToEnable = Random.Range(0, shieldCount);
             while (shieldsToEnable.Contains(shieldToEnable))
-                shieldToEnable = Random.Range(0, shieldCount); shieldsToEnable.Add(Random.Range(0, shieldCount));
+                shieldToEnable = Random.Range(0, shieldCount);
 
             shieldsToEnable.Add(shieldToEnable);
         }
+
+        print($"shields to enable list count {shieldsToEnable.Count}");
 
         foreach (int shieldIndex in shieldsToEnable)
             shields[shieldIndex].gameObject.SetActive(true);
