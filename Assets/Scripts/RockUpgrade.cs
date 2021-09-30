@@ -10,13 +10,13 @@ public class RockUpgrade : Upgrade
         stats.rockDamage += GetDamage(lvl);
     }
 
-    private ulong GetDamage(ulong lvl) => lvl > 0 ? Convert.ToUInt64(Math.Round(50000d * Math.Pow(1.07d, lvl))) : 0;
+    private ulong GetDamage(ulong lvl) => lvl > 0 ? Convert.ToUInt64(Math.Round(5000d * Math.Pow(1.07d, lvl))) : 0;
 
     public override string GetDamageText() => PlayerInfo.GetAdaptedInt(GetDamage(lvl));
 
     public override string GetName() => "Rock";
 
-    public override ulong GetUpgradeCost() => Convert.ToUInt64(Math.Round(500000d * Math.Pow(1.07d, lvl)));
+    public override ulong GetUpgradeCost() => Convert.ToUInt64(Math.Round(10000d * Math.Pow(1.07d, lvl)));
     //public override int GetUpgradeCost() => 1;
 
 

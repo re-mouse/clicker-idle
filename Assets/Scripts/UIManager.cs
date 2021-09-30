@@ -27,7 +27,12 @@ public class UIManager : MonoBehaviour
 
         EntitySpawner.OnEntityTakeDamage.AddListener(x => UpdateEntityHealthBar());
         EntitySpawner.OnEntityTakeDamage.AddListener(ShowDamageText);
+#if UNITY_ANDROID
         EntitySpawner.OnEntityTakeDamage.AddListener(x => MMVibrationManager.Haptic(HapticTypes.SoftImpact));
+#endif
+#if UNITY_IOS
+        EntitySpawner.OnEntityTakeDamage.AddListener(x => MMVibrationManager.Haptic(HapticTypes.RigidImpact));
+#endif
 
         EntitySpawner.OnBossSpawn.AddListener(() => bossKillTimerCoroutine = StartCoroutine(ShowBossKillTimer()));
         EntitySpawner.OnBossDeath.AddListener(() => StopCoroutine(bossKillTimerCoroutine));

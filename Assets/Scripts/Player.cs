@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
 
     private void UpdateUpgrades()
     {
-        print(i.playerInfo.Serialize().ToString());
         stats = new PlayerStats();
 
         foreach (Upgrade upgrade in playerInfo.boughUpgrades)

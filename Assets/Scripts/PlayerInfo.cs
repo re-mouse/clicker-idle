@@ -11,10 +11,10 @@ public class PlayerInfo
     public Upgrade[] boughUpgrades;
     public PlayerInfo() 
     {
-        boughUpgrades = new Upgrade[] {new SwordUpgrade(), new ArrowsUpgrade(), new RockUpgrade(), new MaceUpgrade()};
+        boughUpgrades = new Upgrade[] {new SwordUpgrade(), new BowUpgrade(), new RockUpgrade(), new MaceUpgrade(), new AxeUpgrade(), new CrossbowUpgrade(), new PoleaxeUpgrade(), new CatapultUpgrade()};
     }
 
-    private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade(), new ArrowsUpgrade(), new RockUpgrade(), new MaceUpgrade() };
+    private static Upgrade[] upgradePool = new Upgrade[]{ new SwordUpgrade(), new BowUpgrade(), new RockUpgrade(), new MaceUpgrade(), new AxeUpgrade(), new CrossbowUpgrade(), new PoleaxeUpgrade(), new CatapultUpgrade() };
     public static Upgrade GetUpgrade(UpgradeType type) => Array.Find(upgradePool, x => x.GetUpgradeType() == type);
 
     private static ulong GetPowULong(ulong requiredULong, int pow)
@@ -31,6 +31,14 @@ public class PlayerInfo
 
     public static string GetAdaptedInt(ulong intToAdapt)
     {
+        if (intToAdapt > GetPowULong(10, 19))
+        {
+            return $"{intToAdapt / GetPowULong(10, 18)}Z";
+        }
+        if (intToAdapt > GetPowULong(10, 16))
+        {
+            return $"{intToAdapt / GetPowULong(10, 15)}A";
+        }
         if (intToAdapt > GetPowULong(10, 13)) 
         {
             return $"{intToAdapt / GetPowULong(10, 12)}Q";

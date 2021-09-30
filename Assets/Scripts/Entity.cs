@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class Entity : MonoBehaviour
 {
@@ -16,8 +18,12 @@ public class Entity : MonoBehaviour
     {
         OnDeathEvent.AddListener(DropDown);
         maxHealth = health;
-        rigidBody = GetComponent<Rigidbody2D>(); 
+        rigidBody = GetComponent<Rigidbody2D>();
+        var animator = GetComponent<Animator>();
+        EntitySpawner.OnEntityTakeDamage.AddListener(HitAnimationTrigger);
     }
+
+    private void HitAnimationTrigger(ulong damage) => GetComponent<Animator>().SetTrigger("Hit");
 
     public void SetHealth(ulong health)
     {
@@ -57,8 +63,19 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public static bool IsPointerOverUIElement()
+    {
+        var eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Where(r => r.gameObject.layer == 5).Count() > 0;
+    }
+
     private void OnMouseDown()
     {
+        if (IsPointerOverUIElement())
+            return;
         Player.DamageCurrentEntity(Player.GetPlayerStats().baseDamage);
     }
 
@@ -69,6 +86,7 @@ public class Entity : MonoBehaviour
 
     private void OnDestroy()
     {
+        EntitySpawner.OnEntityTakeDamage.RemoveListener(HitAnimationTrigger);
         OnDeathEvent.RemoveAllListeners();
     }
 }
