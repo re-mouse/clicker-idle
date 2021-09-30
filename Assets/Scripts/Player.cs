@@ -31,14 +31,6 @@ public class Player : MonoBehaviour
     public static PlayerStats GetPlayerStats() => i.stats;
 
 
-    private void UpdateUpgrades()
-    {
-        stats = new PlayerStats();
-
-        foreach (Upgrade upgrade in playerInfo.boughUpgrades)
-            upgrade.ApplyUpgrade(this, stats);
-    }
-
     public static void BuyUpgrade(UpgradeType type)
     {
         Upgrade requirmentUpgrade = Array.Find(i.playerInfo.boughUpgrades, x => x.GetUpgradeType() == type);
@@ -73,4 +65,11 @@ public class Player : MonoBehaviour
         OnPlayerInfoUpdate.Invoke();
     }
     public static ulong GetMobCount() => i.playerInfo.killedMobs;
+    private void UpdateUpgrades()
+    {
+        stats = new PlayerStats();
+
+        foreach (Upgrade upgrade in playerInfo.boughUpgrades)
+            upgrade.ApplyUpgrade(this, stats);
+    }
 }

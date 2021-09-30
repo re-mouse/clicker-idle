@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 public class Entity : MonoBehaviour
 {
     public UnityEvent OnDeathEvent {get; private set;} = new UnityEvent();
-    [SerializeField]
     private ulong health;
     private ulong maxHealth;
     private Rigidbody2D rigidBody;

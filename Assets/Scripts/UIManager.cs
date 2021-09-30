@@ -7,6 +7,12 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
+    private SpriteRenderer background;
+    [SerializeField]
+    private Sprite normalEntitySprite;
+    [SerializeField]
+    private Sprite bossEntitySprite;
+    [SerializeField]
     private Text bossKillTimer;
     [SerializeField]
     private GameObject battleDamagePrefab;
@@ -37,12 +43,14 @@ public class UIManager : MonoBehaviour
         EntitySpawner.OnBossSpawn.AddListener(() => bossKillTimerCoroutine = StartCoroutine(ShowBossKillTimer()));
         EntitySpawner.OnBossDeath.AddListener(() => StopCoroutine(bossKillTimerCoroutine));
         EntitySpawner.OnBossDeath.AddListener(() => bossKillTimer.text = "");
+        EntitySpawner.OnBossDeath.AddListener(() => background.sprite = normalEntitySprite);
 
         Player.OnPlayerInfoUpdate.AddListener(UpdateGold);
     }
 
     private IEnumerator ShowBossKillTimer()
     {
+        background.sprite = bossEntitySprite;
         float timer = EntitySpawner.timeToKillBoss;
         while (timer > 0)
         {
@@ -50,6 +58,7 @@ public class UIManager : MonoBehaviour
             bossKillTimer.text = timer.ToString("0.0");
             yield return new WaitForSeconds(.1f);
         }
+        background.sprite = normalEntitySprite;
         bossKillTimer.text = "";
     }
 

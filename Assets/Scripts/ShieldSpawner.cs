@@ -18,7 +18,7 @@ public class ShieldSpawner : MonoBehaviour
 
     private ulong GetBossLvl()
     {
-        return Player.GetMobCount() / 3;
+        return Player.GetMobCount() / 3 > 40 ? 40 : Player.GetMobCount() / 3;
     }
 
     private IEnumerator ShowShield()
@@ -40,10 +40,6 @@ public class ShieldSpawner : MonoBehaviour
             shieldCount = 2;
         else
             shieldCount = 3;
-
-        print($" calculated shield count {shieldCount}");
-        print($"{Player.GetMobCount()}");
-
 
         while (passedTime < EntitySpawner.timeToKillBoss)
         {
@@ -73,8 +69,6 @@ public class ShieldSpawner : MonoBehaviour
             return;
         }
 
-        print($"enable shield count {count}");
-
         for (int i = 0; i < count; i++)
         {
             int shieldToEnable = Random.Range(0, shieldCount);
@@ -83,8 +77,6 @@ public class ShieldSpawner : MonoBehaviour
 
             shieldsToEnable.Add(shieldToEnable);
         }
-
-        print($"shields to enable list count {shieldsToEnable.Count}");
 
         foreach (int shieldIndex in shieldsToEnable)
             shields[shieldIndex].gameObject.SetActive(true);

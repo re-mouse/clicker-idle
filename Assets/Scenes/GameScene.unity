@@ -242,6 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5728e12f664d7fe419ad85dab0955488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 153839861}
+  normalEntitySprite: {fileID: 21300000, guid: 64ef69a16817c474fb70738da3342c26, type: 3}
+  bossEntitySprite: {fileID: 21300000, guid: 9188eaa5a0220374b925aa2e0bcb9799, type: 3}
   bossKillTimer: {fileID: 1543095933}
   battleDamagePrefab: {fileID: 3687981558297718997, guid: e42d26fb24c01df479fa01313fb38178,
     type: 3}
@@ -489,7 +492,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: 9188eaa5a0220374b925aa2e0bcb9799, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64ef69a16817c474fb70738da3342c26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
